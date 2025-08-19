@@ -1,0 +1,971 @@
+{
+  "stocks": [
+    {
+      "stock_code": "CDSL",
+      "instrument_token": 5420545,
+      "support": 1578.0,
+      "resistance": 1583.5,
+      "volume_threshold": 3200000,
+      "bollinger": {
+        "mid_price": 1581.115,
+        "upper_band": 1583.342352688731,
+        "lower_band": 1578.8876473112691
+      },
+      "macd": {
+        "signal_line": -0.3542017241072997,
+        "histogram": 0.007775188782746023,
+        "ma_fast": 1580.888888888889,
+        "ma_slow": 1581.115,
+        "ma_signal": 1580.888888888889
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent 1-minute data confirms price remains below resistance of 1583.5 and above support of 1578.0, no breakout observed.",
+        "Volume in recent candles remains below threshold, no adjustment needed.",
+        "MACD histogram near zero with slight negative delta indicates neutral momentum, no change in MACD parameters.",
+        "ADX remains below threshold indicating no strong trend; ADX parameters unchanged.",
+        "Bollinger Bands remain consistent with recent price action; no update required."
+      ],
+      "last_updated": "2025-08-19 15:20:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "BSE",
+      "instrument_token": 5013761,
+      "support": 2381.9,
+      "resistance": 2514.4,
+      "volume_threshold": 5393999,
+      "bollinger": {
+        "mid_price": 2456.16,
+        "upper_band": 2574.21,
+        "lower_band": 2338.11
+      },
+      "macd": {
+        "signal_line": -46.61,
+        "histogram": 5.12,
+        "ma_fast": 2416.58,
+        "ma_slow": 2456.16,
+        "ma_signal": 2416.58
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles show a slight upward movement approaching resistance at 2514.4, indicating potential bullish momentum.",
+        "Recent high volume and positive MACD histogram support a bullish trend.",
+        "Support remains at 2381.9, with no significant change observed.",
+        "Bollinger Bands remain wide, reflecting increased volatility, supporting breakout confirmation."
+      ],
+      "last_updated": "2025-08-19 15:17:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "JIOFIN",
+      "instrument_token": 4644609,
+      "support": 326.55,
+      "resistance": 333.7,
+      "volume_threshold": 11363627,
+      "bollinger": {
+        "mid_price": 330.67,
+        "upper_band": 331.5331,
+        "lower_band": 329.8019
+      },
+      "macd": {
+        "signal_line": 4.16,
+        "histogram": 0.2044,
+        "ma_fast": 331.04,
+        "ma_slow": 330.67,
+        "ma_signal": 328.31
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Bollinger Bands updated to upper 331.5331 and lower 329.8019 based on recent 1-minute data showing slight widening and mid price adjustment to 330.67.",
+        "MACD histogram turned positive at 0.2044 in recent data indicating bullish momentum, with fast and slow MA adjusted to 331.04 and 330.67 respectively.",
+        "Support remains at 326.55 as no recent breakdown below this level observed in recent data.",
+        "Resistance maintained at 333.7 as price is near but not breaking above resistance in recent 1-minute candles.",
+        "Volume threshold unchanged at 11363627 consistent with recent peak volume in historical data.",
+        "ADX threshold remains at 20 as ADX values in recent data do not justify change.",
+        "Signal updated to Hold due to price near upper Bollinger Band and positive MACD histogram but no breakout above resistance."
+      ],
+      "last_updated": "2025-08-19 15:20:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "GESHIP",
+      "instrument_token": 3526657,
+      "support": 944.85,
+      "resistance": 977.5,
+      "volume_threshold": 280009,
+      "bollinger": {
+        "mid_price": 955.805,
+        "upper_band": 1001.5811,
+        "lower_band": 910.0289
+      },
+      "macd": {
+        "signal_line": -9.8703,
+        "histogram": 3.4523,
+        "ma_fast": 945.3667,
+        "ma_slow": 955.805,
+        "ma_signal": 955.9193
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles show a strong upward momentum with the close near the resistance of 977.5, indicating a potential breakout.",
+        "MACD remains positive and shows increasing bullish momentum, supporting a bullish outlook.",
+        "Volume has increased significantly in recent candles, confirming strong buying interest.",
+        "Price is trading above the support level of 944.85, with the recent high surpassing previous resistance levels."
+      ],
+      "last_updated": "2025-08-19 15:15:00",
+      "signal": "Buy"
+    },
+    {
+      "stock_code": "MCX",
+      "instrument_token": 7982337,
+      "support": 7900.0,
+      "resistance": 8439.5,
+      "volume_threshold": 600000,
+      "bollinger": {
+        "mid_price": 8287.875,
+        "upper_band": 8301.888832452258,
+        "lower_band": 8273.861167547742
+      },
+      "macd": {
+        "signal_line": 2.548794962765562,
+        "histogram": 0.6589594853761516,
+        "ma_fast": 8294.055555555555,
+        "ma_slow": 8287.875,
+        "ma_signal": 2.548794962765562
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 25
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Bollinger Bands updated to reflect recent 1-minute candle data showing consolidation near upper band at ~8301.89 and lower band at ~8273.86.",
+        "MACD values updated to reflect recent positive histogram and signal line indicating short-term bullish momentum.",
+        "Moving averages for MACD fast and slow adjusted to recent minute-level averages around 8294.06 and 8287.88 respectively.",
+        "Support and resistance levels retained due to no recent breach or breakout in recent data.",
+        "Volume threshold unchanged as recent volume remains low without significant spikes.",
+        "MACD signal line set equal to recent MACD signal for consistency."
+      ],
+      "last_updated": "2025-08-19 15:18:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "GRSE",
+      "instrument_token": 1401601,
+      "support": 2475.0,
+      "resistance": 2685.0,
+      "volume_threshold": 1000000,
+      "bollinger": {
+        "mid_price": 2560.0,
+        "upper_band": 2647.0,
+        "lower_band": 2475.0
+      },
+      "macd": {
+        "signal_line": 0.2389,
+        "histogram": 0.2322,
+        "ma_fast": 2561.0,
+        "ma_slow": 2600.0,
+        "ma_signal": 2550.0
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles show a slight upward momentum with the latest close at 2596.7, near the resistance at 2685.0.",
+        "ADX remains above 20, indicating a strong trend.",
+        "MACD histogram is negative but decreasing in magnitude, suggesting potential weakening of bearish momentum.",
+        "Price is trading within Bollinger Bands, indicating no immediate breakout but close to upper band."
+      ],
+      "last_updated": "2025-08-19 15:00:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "DELHIVERY",
+      "instrument_token": 2457345,
+      "support": 468.08,
+      "resistance": 474.1,
+      "volume_threshold": 1205382,
+      "bollinger": {
+        "mid_price": 470.54,
+        "upper_band": 472.99,
+        "lower_band": 468.08
+      },
+      "macd": {
+        "signal_line": 0.44,
+        "histogram": 0.17,
+        "ma_fast": 471.76,
+        "ma_slow": 470.54,
+        "ma_signal": 470.54
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Support level updated to 468.08 based on recent 1-minute Bollinger lower band and lows confirming stronger short-term support above previous 467.9.",
+        "Resistance level retained at 474.1 as recent highs have not broken this level.",
+        "Volume threshold unchanged due to no significant volume spikes in recent 1-minute data.",
+        "Bollinger bands updated to reflect recent 1-minute data with mid price at 470.54, upper band at 472.99, and lower band at 468.08.",
+        "MACD values updated to reflect recent positive MACD histogram and signal line indicating mild bullish momentum with faster moving averages.",
+        "ADX threshold and period unchanged as ADX remains stable without strong trend indication."
+      ],
+      "last_updated": "2025-08-19 15:18:00",
+      "signal": "Buy"
+    },
+    {
+      "stock_code": "PARAS",
+      "instrument_token": 1513217,
+      "support": 679.12,
+      "resistance": 681.13,
+      "volume_threshold": 989027,
+      "bollinger": {
+        "mid_price": 679.12,
+        "upper_band": 681.13,
+        "lower_band": 677.11
+      },
+      "macd": {
+        "signal_line": 0.3692,
+        "histogram": 0.2423,
+        "ma_fast": 679.7,
+        "ma_slow": 679.12,
+        "ma_signal": 0.0
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles show slight upward momentum with close near resistance at 681.13, indicating potential for a breakout.",
+        "MACD remains positive and slightly increasing, supporting bullish sentiment.",
+        "Vwap difference and ATR suggest increased volatility, which may lead to a breakout.",
+        "Support remains stable, but resistance is being tested with recent high activity."
+      ],
+      "last_updated": "2025-08-19 15:18:00",
+      "signal": "Buy"
+    },
+    {
+      "stock_code": "RRKABEL",
+      "instrument_token": 4752897,
+      "support": 1204.1,
+      "resistance": 1248.0,
+      "volume_threshold": 111936,
+      "bollinger": {
+        "mid_price": 1217.775,
+        "upper_band": 1219.9757953107921,
+        "lower_band": 1215.574204689208
+      },
+      "macd": {
+        "signal_line": 0.6462662949848765,
+        "histogram": 0.11195076434197637,
+        "ma_fast": 1218.7,
+        "ma_slow": 1217.775,
+        "ma_signal": 0.0
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 22.74
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Support remains at 1204.1 as recent daily lows confirm this level.",
+        "Resistance remains at 1248.0 with no recent breakout above this level.",
+        "Bollinger Bands updated to recent 1-minute data showing mid_price at 1217.775, upper_band at 1219.98, and lower_band at 1215.57 indicating a slightly wider range than before.",
+        "MACD histogram and signal line remain positive in recent minutes indicating mild bullish momentum.",
+        "ADX threshold increased to 22.74 reflecting a slight increase in trend strength from recent data.",
+        "Volume threshold unchanged as recent volumes remain low and stable."
+      ],
+      "last_updated": "2025-08-19 15:20:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "RTNINDIA",
+      "instrument_token": 6988033,
+      "support": 50.0,
+      "resistance": 54.0,
+      "volume_threshold": 4000000,
+      "bollinger": {
+        "mid_price": 53.0,
+        "upper_band": 54.0,
+        "lower_band": 52.0
+      },
+      "macd": {
+        "signal_line": 0.0025,
+        "histogram": 0.0018,
+        "ma_fast": 53.84,
+        "ma_slow": 53.48,
+        "ma_signal": 53.48
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles show a strong upward movement with the close near resistance at 54.0, indicating potential breakout.",
+        "MACD remains positive and stable, supporting bullish momentum.",
+        "Volume remains high and consistent with recent trend, supporting breakout potential.",
+        "Support level remains unchanged, but resistance has been tested multiple times recently."
+      ],
+      "last_updated": "2025-08-19 15:19:00",
+      "signal": "Buy"
+    },
+    {
+      "stock_code": "PARADEEP",
+      "instrument_token": 2493697,
+      "support": 199.02,
+      "resistance": 229.28,
+      "volume_threshold": 9000000,
+      "bollinger": {
+        "mid_price": 208.4,
+        "upper_band": 241.62,
+        "lower_band": 175.18
+      },
+      "macd": {
+        "signal_line": 12.921,
+        "histogram": -2.7109,
+        "ma_fast": 220.33,
+        "ma_slow": 208.4,
+        "ma_signal": 208.4
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Support retained at 199.02 as recent minute data shows price holding above this level.",
+        "Resistance retained at 229.28 due to no breakout in recent minute or daily data.",
+        "Volume threshold maintained at 9000000 as recent volumes remain significantly lower, no surge detected.",
+        "Bollinger Bands unchanged as recent minute data mid, upper, and lower bands align with historical values.",
+        "MACD values retained from historical data due to lack of significant momentum change in recent minutes.",
+        "Signal set to Hold given no strong breakout or reversal signals in recent minute data and stable ADX."
+      ],
+      "last_updated": "2025-08-19 15:20:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "COCHINSHIP",
+      "instrument_token": 5506049,
+      "support": 1647.3,
+      "resistance": 1735.0,
+      "volume_threshold": 1500416,
+      "bollinger": {
+        "mid_price": 1690.0,
+        "upper_band": 1735.0,
+        "lower_band": 1655.0
+      },
+      "macd": {
+        "signal_line": 0.7117137550318986,
+        "histogram": 0.6620015133324231,
+        "ma_fast": 1707.975,
+        "ma_slow": 1707.975,
+        "ma_signal": 1707.975
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles show consolidation near support level of 1647.3 with no clear breakout.",
+        "No significant trend change or breakout observed in recent data.",
+        "Volume remains stable without spike, supporting unchanged volume threshold.",
+        "Bollinger Bands indicate slight volatility but no breakout beyond bands.",
+        "MACD remains near neutral, suggesting no strong bullish or bearish momentum."
+      ],
+      "last_updated": "2025-08-19 15:15:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "TRENT",
+      "instrument_token": 502785,
+      "support": 5495.7,
+      "resistance": 5507.0,
+      "volume_threshold": 1200000,
+      "bollinger": {
+        "mid_price": 5501.4,
+        "upper_band": 5507.0,
+        "lower_band": 5495.7
+      },
+      "macd": {
+        "signal_line": 4.15,
+        "histogram": -0.47,
+        "ma_fast": 5503.3,
+        "ma_slow": 5501.5,
+        "ma_signal": 0.0
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Support updated to 5495.7 based on recent 1-minute data low and lower Bollinger band.",
+        "Resistance updated to 5507.0 based on recent 1-minute data high and upper Bollinger band.",
+        "Bollinger bands adjusted to recent price levels reflecting slightly wider range and minor upward shift.",
+        "Volume threshold retained as recent volume remains below historical average, no significant spike detected.",
+        "MACD histogram remains slightly negative indicating mild bearish momentum but MACD line positive suggesting potential bullish crossover.",
+        "ADX threshold retained at 20 as ADX remains around this level indicating neutral trend strength."
+      ],
+      "last_updated": "2025-08-19 15:30:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "POWERINDIA",
+      "instrument_token": 4724993,
+      "support": 19660.0,
+      "resistance": 19800.0,
+      "volume_threshold": 1240,
+      "bollinger": {
+        "mid_price": 19770.0,
+        "upper_band": 19924.0,
+        "lower_band": 19684.0
+      },
+      "macd": {
+        "signal_line": 10.4,
+        "histogram": -5.6,
+        "ma_fast": 19770.0,
+        "ma_slow": 19804.0,
+        "ma_signal": 19800.0
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles indicate a slight downward move towards support at 19660.0 with increased volatility and no clear breakout.",
+        "MACD remains negative but shows signs of decreasing bearish momentum, suggesting potential stabilization.",
+        "ADX remains below 20, indicating weak trend strength, but recent volatility suggests cautious observation.",
+        "Volume remains low, consistent with recent consolidation, supporting a hold stance."
+      ],
+      "last_updated": "2025-08-19 15:20:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "KAJARIACER",
+      "instrument_token": 462849,
+      "support": 1250.0,
+      "resistance": 1315.0,
+      "volume_threshold": 1100000,
+      "bollinger": {
+        "mid_price": 1290.7050000000002,
+        "upper_band": 1293.9190161791746,
+        "lower_band": 1287.4909838208257
+      },
+      "macd": {
+        "signal_line": 0.9747802938382268,
+        "histogram": 0.05082142997431549,
+        "ma_fast": 1292.1888888888889,
+        "ma_slow": 1290.7050000000002,
+        "ma_signal": 0.9747802938382268
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "No significant breakout or breakdown in recent 1-minute candles; price remains within historical support and resistance.",
+        "Volume in recent candles remains below threshold; no adjustment to volume threshold justified.",
+        "MACD histogram remains slightly positive, indicating mild bullish momentum but no strong signal for change.",
+        "ADX remains above threshold indicating trend presence but no directional change to adjust parameters.",
+        "Bollinger Bands remain consistent with recent price action; no update needed.",
+        "Signal remains Hold due to consolidation and absence of strong directional cues."
+      ],
+      "last_updated": "2025-08-19 15:20:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "FORCEMOT",
+      "instrument_token": 2962689,
+      "support": 18000.0,
+      "resistance": 20400.0,
+      "volume_threshold": 178996,
+      "bollinger": {
+        "mid_price": 19500.0,
+        "upper_band": 20155.0,
+        "lower_band": 19200.0
+      },
+      "macd": {
+        "signal_line": 6.389882551421106,
+        "histogram": 1.8017334511223595,
+        "ma_fast": 9.0,
+        "ma_slow": 20.0,
+        "ma_signal": 6.389882551421106
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles show a strong upward momentum with price near resistance levels.",
+        "Recent volume spikes and positive MACD histogram support bullish trend.",
+        "ADX remains above 20, indicating a trending market.",
+        "Recent price action suggests potential breakout above resistance."
+      ],
+      "last_updated": "2025-08-19 15:15:00",
+      "signal": "Buy"
+    },
+    {
+      "stock_code": "POLYCAB",
+      "instrument_token": 2455041,
+      "support": 7091.5,
+      "resistance": 7123.613605999442,
+      "volume_threshold": 464368,
+      "bollinger": {
+        "mid_price": 7113.166666666667,
+        "upper_band": 7123.613605999442,
+        "lower_band": 7081.936394000557
+      },
+      "macd": {
+        "signal_line": 5.456097510641024,
+        "histogram": 1.7666069355323142,
+        "ma_fast": 7113.166666666667,
+        "ma_slow": 7102.775,
+        "ma_signal": 0.0
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Resistance updated to recent 1-minute upper Bollinger Band of 7123.61 indicating breakout potential.",
+        "Bollinger Bands updated to reflect latest 1-minute price action with upper band expansion.",
+        "MACD values updated to reflect increased momentum in recent 1-minute data.",
+        "Support retained at recent low of 7091.5 from last 1-minute candle lows.",
+        "Volume threshold retained as recent volume spikes did not exceed historical maximum."
+      ],
+      "last_updated": "2025-08-19 15:20:00",
+      "signal": "Buy"
+    },
+    {
+      "stock_code": "ANANDRATHI",
+      "instrument_token": 1829121,
+      "support": 2690.0,
+      "resistance": 2780.0,
+      "volume_threshold": 380000,
+      "bollinger": {
+        "mid_price": 2822.0,
+        "upper_band": 2826.5,
+        "lower_band": 2817.5
+      },
+      "macd": {
+        "signal_line": 0.06,
+        "histogram": 0.06,
+        "ma_fast": 2822.0,
+        "ma_slow": 2822.0,
+        "ma_signal": 2822.0
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles show a strong upward movement, with close near resistance levels and high volume.",
+        "Price is trading above the Bollinger upper band, indicating potential overbought condition but also strong bullish momentum.",
+        "MACD remains positive and above signal line, confirming bullish trend.",
+        "ADX remains high (~50), indicating a strong trend.",
+        "Recent support levels are holding, but resistance is being tested."
+      ],
+      "last_updated": "2025-08-19 15:16:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "CHOLAHLDNG",
+      "instrument_token": 5565441,
+      "support": 1815.0,
+      "resistance": 1871.81,
+      "volume_threshold": 135159,
+      "bollinger": {
+        "mid_price": 1856.44,
+        "upper_band": 1871.81,
+        "lower_band": 1841.06
+      },
+      "macd": {
+        "signal_line": -4.95,
+        "histogram": -0.37,
+        "ma_fast": 1849.43,
+        "ma_slow": 1856.44,
+        "ma_signal": 1856.44
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Resistance updated from 1876.35 to 1871.81 based on recent 1-minute candle upper Bollinger Band and recent high of 1871.81.",
+        "Bollinger Bands updated to reflect recent 1-minute data range with mid price at 1856.44, upper band at 1871.81, and lower band at 1841.06.",
+        "MACD values updated to reflect recent 1-minute data: signal line -4.95, histogram -0.37, moving averages adjusted accordingly.",
+        "Support retained at 1815.0 as no recent breakout below this level was observed.",
+        "Volume threshold retained at 135159 due to no significant volume spike in recent data.",
+        "ADX threshold and period retained as recent ADX is above threshold indicating trend strength."
+      ],
+      "last_updated": "2025-08-19 15:22:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "NATCOPHARM",
+      "instrument_token": 1003009,
+      "support": 870.0,
+      "resistance": 950.0,
+      "volume_threshold": 1000000,
+      "bollinger": {
+        "mid_price": 894.1167,
+        "upper_band": 895.5249,
+        "lower_band": 889.7701
+      },
+      "macd": {
+        "signal_line": -0.049999999999954525,
+        "histogram": 0.14999999999997726,
+        "ma_fast": 894.1167,
+        "ma_slow": 892.6475,
+        "ma_signal": 894.1167
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Recent candles show consolidation near support at 870.0 with no clear breakout.",
+        "No significant trend change observed in recent data.",
+        "Bollinger Bands remain tight, indicating low volatility.",
+        "MACD remains near neutral, with slight positive histogram suggesting no strong momentum.",
+        "ADX remains above 20, indicating a persistent trend but no new breakout signals."
+      ],
+      "last_updated": "2025-08-19 15:21:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "GMDCLTD",
+      "instrument_token": 1332225,
+      "support": 410.0,
+      "resistance": 435.0,
+      "volume_threshold": 5000000,
+      "bollinger": {
+        "mid_price": 429.2,
+        "upper_band": 431.1,
+        "lower_band": 427.9
+      },
+      "macd": {
+        "signal_line": 0.0323,
+        "histogram": -0.2,
+        "ma_fast": 429.21,
+        "ma_slow": 0.0,
+        "ma_signal": 0.0
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Bollinger Bands adjusted to recent 1-minute data showing mid price at 429.2 with upper band at 431.1 and lower band at 427.9 reflecting current price consolidation.",
+        "MACD histogram updated to negative (-0.20) based on recent 1-minute data indicating short-term bearish momentum.",
+        "Support and resistance levels retained as recent price action remains within these bounds without significant breakout or breakdown.",
+        "Volume threshold unchanged due to consistent trading volumes without major spikes in recent data."
+      ],
+      "last_updated": "2025-08-19 15:30:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "ETERNAL",
+      "instrument_token": 1304833,
+      "support": 316.0,
+      "resistance": 323.7,
+      "volume_threshold": 15000,
+      "bollinger": {
+        "mid_price": 316.45,
+        "upper_band": 316.55,
+        "lower_band": 316.35
+      },
+      "macd": {
+        "signal_line": 0.007,
+        "histogram": 0.0118,
+        "ma_fast": 316.45,
+        "ma_slow": 316.45,
+        "ma_signal": 316.45
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 316.45,
+        "ma_slow": 316.45
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Support adjusted to 316.0 based on recent lows.",
+        "Resistance adjusted to 323.7 based on recent highs.",
+        "Bollinger Bands updated based on recent price movements.",
+        "MACD indicates a neutral trend with minimal divergence.",
+        "Recent candles show consolidation near support and resistance levels."
+      ],
+      "last_updated": "2025-08-18 11:02:00",
+      "signal": "Hold"
+    },
+    {
+      "stock_code": "RPOWER-BE",
+      "instrument_token": 3906817,
+      "support": 43.0,
+      "resistance": 45.44,
+      "volume_threshold": 17569894,
+      "bollinger": {
+        "mid_price": 44.22,
+        "upper_band": 45.44,
+        "lower_band": 43.0
+      },
+      "macd": {
+        "signal_line": 0.00266,
+        "histogram": -0.00101,
+        "ma_fast": 45.44,
+        "ma_slow": 45.44,
+        "ma_signal": 44.22
+      },
+      "adx": {
+        "period": 14,
+        "threshold": 20
+      },
+      "moving_averages": {
+        "ma_fast": 9,
+        "ma_slow": 20
+      },
+      "inside_bar": {
+        "lookback": 1
+      },
+      "candle": {
+        "min_body_percent": 0.7
+      },
+      "reason": [
+        "Resistance updated to 45.44 based on recent 1-minute candle highs indicating breakout above previous resistance of 44.92.",
+        "Bollinger Bands upper band adjusted to 45.44 reflecting recent price breakout and consolidation.",
+        "MACD parameters updated to reflect recent slight negative histogram indicating weakening bullish momentum.",
+        "Support retained at 43.0 as recent lows have not breached this level.",
+        "Volume threshold retained as recent volumes remain below historical peak."
+      ],
+      "last_updated": "2025-08-19 15:20:00",
+      "signal": "Hold"
+    }
+  ]
+}
