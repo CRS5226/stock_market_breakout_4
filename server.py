@@ -397,7 +397,7 @@ def run():
     send_server_feedback()
 
     NUM_SHARDS = 2  # collectors
-    MONITOR_SHARDS = 2  # monitors
+    MONITOR_SHARDS = 8  # monitors
 
     while True:
         try:
@@ -444,3 +444,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+
