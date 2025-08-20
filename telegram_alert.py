@@ -27,7 +27,7 @@ load_dotenv()
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHAT_IDS_FILE = "telegram_chat_ids.json"
-CONFIG_FILE = "config400.json"
+CONFIG_FILE = "config.json"
 STOCKS_CSV = "stocks_reference.csv"
 
 logging.basicConfig(level=logging.INFO)
@@ -102,6 +102,28 @@ def send_trade_alert(symbol: str, action: str, price: float, date: str):
         f"Date: `{date_ist}`"
     )
     asyncio.run(send_telegram_message(message))
+
+
+def send_server_feedback():
+    """Send a startup message with stock list from config.json."""
+    config = load_config()
+    stock_list = config.get("stocks", [])
+
+    if not stock_list:
+        message = "🚀 Server started, but no stocks found in config.json."
+    else:
+        stock_lines = "\n".join(
+            [f"{i+1}. {s['stock_code']}" for i, s in enumerate(stock_list)]
+        )
+        message = (
+            f"🚀 *Server Started*\n"
+            f"Fetching data for {len(stock_list)} stocks:\n{stock_lines}"
+        )
+
+    try:
+        asyncio.run(send_telegram_message(message))
+    except Exception as e:
+        print(f"[⚠️ Telegram Feedback Error] {e}")
 
 
 def send_config_update(status: str, symbol: str):

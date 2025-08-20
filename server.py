@@ -12,15 +12,16 @@ from telegram_alert import (
     send_pipeline_status,
     send_error_alert,
     send_config_update,
+    send_server_feedback,
 )
 from llm_forecast import forecast_config_update, route_model
 from basic_algo_forecaster import basic_forecast_update
 from throughput_monitor import ThroughputMonitor
-from redis_utils import get_redis, get_recent_candles
+from redis_utils import get_redis, get_recent_candles, get_recent_indicators
 
 r = get_redis()
 
-CONFIG_PATH = "config400.json"
+CONFIG_PATH = "config.json"
 DATA_FOLDER = "data"
 STATS_FILE = "monitor_stats.json"
 
@@ -74,6 +75,10 @@ def print_config_changes(stock_code, new_config):
 
     if messages:
         print(f"[🔁 CONFIG CHANGE] {stock_code} → " + ", ".join(messages))
+        send_config_update(
+            f"⚙️ Config Updated: {stock_code}\n" + "\n".join(messages), stock_code
+        )
+
         # if not last_config:
         #     send_config_update(
         #         f"🆕 Stock Added: {stock_code}\n" + "\n".join(messages), stock_code
@@ -157,9 +162,10 @@ def detect_removed_stocks(existing_codes):
 def forecast_manager():
     print("🧠 Forecast Manager started.")
 
+    # 🔀 Toggle here: True = LLM forecast, False = custom algo
+    USE_LLM = False
+
     monitor = ThroughputMonitor(window_sec=60, csv_path="forecast/throughput.csv")
-    last_print = 0.0
-    last_csv = 0.0
 
     while True:
         try:
@@ -167,63 +173,87 @@ def forecast_manager():
             stocks = config_data.get("stocks", [])
 
             for i, stock_cfg in enumerate(stocks):
-                stock_code = stock_cfg["stock_code"]
+            stock_code = stock_cfg["stock_code"]
 
-                # --- Redis + historical lookup handled in forecast_config_update ---
-                model_choice = route_model(stock_code, i)
+            updated_cfg = None
+            reasons = None
+            err = None
 
-                t0 = time.time()
-                print(f"[🔮 Forecast] {stock_code} via {model_choice} ...")
-                updated_cfg, reasons, err = forecast_config_update(
-                    stock_cfg,
-                    historical_folder="historical_data",  # ✅ only pass folder now
-                    model=model_choice,
-                    temperature=0.2,
-                    escalate_on_signal=True,
-                )
-                latency_ms = (time.time() - t0) * 1000.0
-                monitor.record(stock_code, model_choice, latency_ms)
+            try:
+                if USE_LLM:
+                    try:
+                        # 🔮 LLM Forecast
+                        model_choice = route_model(stock_code, i)
+                        print(f"[🔮 Forecast] {stock_code} via {model_choice} (LLM)")
 
-                if err:
-                    print(f"[❌ LLM Forecast Error - {stock_code}] {err}")
+                        t0 = time.time()
+                        updated_cfg, reasons, err = forecast_config_update(
+                            stock_cfg,
+                            historical_folder="historical_data",
+                            model=model_choice,
+                            temperature=0.2,
+                            escalate_on_signal=True,
+                        )
+                        latency_ms = (time.time() - t0) * 1000.0
+                        monitor.record(stock_code, model_choice, latency_ms)
+
+                    except Exception as llm_e:
+                        # 🚨 LLM failed → fallback to basic algo
+                        print(f"[⚠️ LLM Error for {stock_code}] {llm_e}")
+                        print(f"[📊 Fallback] Using basic algo for {stock_code}...")
+
+                        rows = get_recent_indicators(r, stock_code, n=200)
+                        if rows:
+                            df = pd.DataFrame(reversed(rows))
+                        else:
+                            print(f"[⚠️] No recent indicators found for {stock_code}")
+                            df = pd.DataFrame()
+
+                        updated_cfg = basic_forecast_update(
+                            stock_cfg,
+                            recent_df=df,
+                            historical_folder="historical_data",
+                        )
+                        reasons = "Fallback to basic algo due to LLM error"
+
                 else:
-                    if updated_cfg != stock_cfg:
-                        stocks[i] = updated_cfg
-                        with open(CONFIG_PATH, "w") as f:
-                            json.dump(config_data, f, indent=2)
-                        print(f"[🧠 LLM Forecast - {stock_code}] Updated config")
-                        if reasons:
-                            print(f"[ℹ️ Reasons] {reasons}")
+                    # 📊 Custom Algorithm Forecast only
+                    print(f"[📊 Forecast] {stock_code} via basic algo...")
+
+                    rows = get_recent_indicators(r, stock_code, n=200)
+                    if rows:
+                        df = pd.DataFrame(reversed(rows))
                     else:
-                        print(f"[🧠 LLM Forecast - {stock_code}] No changes detected")
+                        print(f"[⚠️] No recent indicators found for {stock_code}")
+                        df = pd.DataFrame()
 
-                # pacing delay (tune for RPM/TPM)
-                time.sleep(5)
+                    updated_cfg = basic_forecast_update(
+                        stock_cfg,
+                        recent_df=df,
+                        historical_folder="historical_data",
+                    )
 
-                # --- dashboard every 10s
-                now = time.time()
-                if now - last_print >= 10:
-                    snap = monitor.snapshot()
-                    # print(
-                    #     f"[⏱ Last {snap['window_sec']}s] "
-                    #     f"Unique stocks: {snap['unique_symbols_last_window']} "
-                    #     f"({snap['pct_of_400']}% of 400) | "
-                    #     f"Events: {snap['events_last_window']} | "
-                    #     f"Avg {snap['avg_latency_ms']} ms | "
-                    #     f"P50 {snap['p50_latency_ms']} ms | "
-                    #     f"P90 {snap['p90_latency_ms']} ms | "
-                    #     f"P99 {snap['p99_latency_ms']} ms | "
-                    #     f"Per-model {snap['per_model_counts']}"
-                    # )
-                    last_print = now
+            except Exception as inner_e:
+                err = str(inner_e)
 
-                # --- CSV snapshot every 60s
-                if now - last_csv >= 60:
-                    monitor.log_snapshot_csv()
-                    last_csv = now
+            # --- Apply updates ---
+            if err:
+                print(f"[❌ Forecast Error - {stock_code}] {err}")
+            else:
+                if updated_cfg != stock_cfg:
+                    stocks[i] = updated_cfg
+                    with open(CONFIG_PATH, "w") as f:
+                        json.dump(config_data, f, indent=2)
+                    print(f"[✅ Forecast Updated - {stock_code}]")
+                    if reasons:
+                        print(f"[ℹ️ Reasons] {reasons}")
+                else:
+                    print(f"[🧠 Forecast - {stock_code}] No changes detected")
+
+            time.sleep(10)  # pacing delay
 
         except Exception as e:
-            # send_error_alert(f"[Forecast Manager Error] {type(e).__name__}: {e}")
+            print(f"[Forecast Manager Error] {type(e).__name__}: {e}")
             time.sleep(30)
 
 
@@ -262,6 +292,8 @@ def monitor_shard(stock_list, stats, shard_id, total_shards, lookback_candles=20
                 # Chronological order
                 df = pd.DataFrame(reversed(rows))
                 df["Timestamp"] = pd.to_datetime(df["minute"])
+                # df = df.drop_duplicates(subset=["Timestamp"]).reset_index(drop=True)
+
                 df.rename(
                     columns={
                         "open": "Open",
@@ -353,8 +385,19 @@ def run():
 
     print("🚀 Real-Time Stock Monitor started. Watching for changes...")
 
+    # config = load_config()
+    # stock_list = config.get("stocks", [])
+
+    # # ✅ Pre-fill LAST_CONFIG so existing stocks aren’t flagged as "added"
+    # for s in stock_list:
+    #     code = s.get("stock_code")
+    #     if code:
+    #         LAST_CONFIG[code] = s.copy()
+
+    send_server_feedback()
+
     NUM_SHARDS = 2  # collectors
-    MONITOR_SHARDS = 8  # monitors
+    MONITOR_SHARDS = 2  # monitors
 
     while True:
         try:
