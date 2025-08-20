@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-CONFIG_PATH = "config30.json"
+CONFIG_PATH = "config.json"
 SAVE_FOLDER = "historical_data"
 INTERVAL = "day"
 
@@ -18,9 +18,9 @@ INTERVAL = "day"
 
 def _atr_wilder(df: pd.DataFrame, period: int = 14) -> pd.Series:
     """ATR using Wilder smoothing."""
-    high_low = (df["high"] - df["low"]).abs()
-    high_close = (df["high"] - df["close"].shift(1)).abs()
-    low_close = (df["low"] - df["close"].shift(1)).abs()
+    high_low = (df["High"] - df["Low"]).abs()
+    high_close = (df["High"] - df["Close"].shift(1)).abs()
+    low_close = (df["Low"] - df["Close"].shift(1)).abs()
     tr = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
     atr = tr.ewm(alpha=1 / period, adjust=False).mean()
     return atr
@@ -28,17 +28,17 @@ def _atr_wilder(df: pd.DataFrame, period: int = 14) -> pd.Series:
 
 def _adx_wilder(df: pd.DataFrame, period: int = 14) -> pd.DataFrame:
     """+DI, -DI, ADX with Wilder smoothing."""
-    up_move = df["high"].diff()
-    down_move = -df["low"].diff()
+    up_move = df["High"].diff()
+    down_move = -df["Low"].diff()
 
     plus_dm = np.where((up_move > down_move) & (up_move > 0), up_move, 0.0)
     minus_dm = np.where((down_move > up_move) & (down_move > 0), down_move, 0.0)
 
     tr = pd.concat(
         [
-            (df["high"] - df["low"]).abs(),
-            (df["high"] - df["close"].shift(1)).abs(),
-            (df["low"] - df["close"].shift(1)).abs(),
+            (df["High"] - df["Low"]).abs(),
+            (df["High"] - df["Close"].shift(1)).abs(),
+            (df["Low"] - df["Close"].shift(1)).abs(),
         ],
         axis=1,
     ).max(axis=1)
@@ -65,14 +65,11 @@ def _adx_wilder(df: pd.DataFrame, period: int = 14) -> pd.DataFrame:
 
 
 def _rolling_vwap(df: pd.DataFrame, window: int = 20) -> pd.Series:
-    """
-    Rolling (multi-day) VWAP for daily bars.
-    Typical price * Volume rolling sum / Volume rolling sum.
-    """
-    tp = (df["high"] + df["low"] + df["close"]) / 3.0
-    pv = tp * df["volume"].clip(lower=0)
+    """Rolling VWAP for daily bars."""
+    tp = (df["High"] + df["Low"] + df["Close"]) / 3.0
+    pv = tp * df["Volume"].clip(lower=0)
     num = pv.rolling(window=window, min_periods=1).sum()
-    den = df["volume"].rolling(window=window, min_periods=1).sum().replace(0, np.nan)
+    den = df["Volume"].rolling(window=window, min_periods=1).sum().replace(0, np.nan)
     return num / den
 
 
@@ -80,81 +77,78 @@ def _rolling_vwap(df: pd.DataFrame, window: int = 20) -> pd.Series:
 
 
 def calculate_indicators(df: pd.DataFrame) -> pd.DataFrame:
-    # Ensure datetime and sorting; Kite returns 'date','open','high','low','close','volume'
-    df["date"] = pd.to_datetime(df["date"])
-    df = df.sort_values("date").reset_index(drop=True)
+    df["Timestamp"] = pd.to_datetime(df["Timestamp"])
+    df = df.sort_values("Timestamp").reset_index(drop=True)
 
-    # --- Moving Averages (your original) ---
-    df["MA_Fast"] = df["close"].rolling(window=9, min_periods=1).mean()
-    df["MA_Slow"] = df["close"].rolling(window=20, min_periods=1).mean()
+    # Moving Averages
+    df["MA_Fast"] = df["Close"].rolling(window=9, min_periods=1).mean()
+    df["MA_Slow"] = df["Close"].rolling(window=20, min_periods=1).mean()
 
-    # --- Bollinger Bands (original, period=20, std=2) ---
+    # Bollinger Bands
     bb_period = 20
-    bb_mid = df["close"].rolling(window=bb_period, min_periods=1).mean()
-    bb_std = df["close"].rolling(window=bb_period, min_periods=1).std(ddof=0)
+    bb_mid = df["Close"].rolling(window=bb_period, min_periods=1).mean()
+    bb_std = df["Close"].rolling(window=bb_period, min_periods=1).std(ddof=0)
     df["BB_Mid"] = bb_mid
     df["BB_Upper"] = bb_mid + (bb_std * 2.0)
     df["BB_Lower"] = bb_mid - (bb_std * 2.0)
 
-    # --- MACD (original 12/26/9) ---
-    ema_fast = df["close"].ewm(span=12, adjust=False).mean()
-    ema_slow = df["close"].ewm(span=26, adjust=False).mean()
+    # MACD
+    ema_fast = df["Close"].ewm(span=12, adjust=False).mean()
+    ema_slow = df["Close"].ewm(span=26, adjust=False).mean()
     df["MACD"] = ema_fast - ema_slow
     df["MACD_Signal"] = df["MACD"].ewm(span=9, adjust=False).mean()
     df["MACD_Hist"] = df["MACD"] - df["MACD_Signal"]
 
-    # --- ADX family (upgraded to Wilder smoothing) ---
+    # ADX
     adx_df = _adx_wilder(df, period=14)
     df["+DI"] = adx_df["+DI"]
     df["-DI"] = adx_df["-DI"]
     df["ADX"] = adx_df["ADX"]
 
-    # ======== NEW FIELDS you wanted ========
-
-    # 1) HH20 / LL20 (20-bar highs/lows)
+    # HH20/LL20
     lookback = 20
-    df["HH20"] = df["high"].rolling(window=lookback, min_periods=1).max()
-    df["LL20"] = df["low"].rolling(window=lookback, min_periods=1).min()
+    df["HH20"] = df["High"].rolling(window=lookback, min_periods=1).max()
+    df["LL20"] = df["Low"].rolling(window=lookback, min_periods=1).min()
 
-    # 2) dist_hh20_bps = (HH20 - close)/close * 10000
+    # dist_hh20_bps
     df["dist_hh20_bps"] = (
-        (df["HH20"] - df["close"]) / df["close"].replace(0, np.nan)
+        (df["HH20"] - df["Close"]) / df["Close"].replace(0, np.nan)
     ) * 10000.0
 
-    # 3) bb_width_bps = (BB_Upper - BB_Lower)/BB_Mid * 10000
+    # bb_width_bps
     df["bb_width_bps"] = (
         (df["BB_Upper"] - df["BB_Lower"]) / df["BB_Mid"].replace(0, np.nan)
     ) * 10000.0
 
-    # 4) bb_squeeze: current width < 1.10 * rolling-min(width, 20)
+    # bb_squeeze
     roll_min_width = df["bb_width_bps"].rolling(window=lookback, min_periods=1).min()
     df["bb_squeeze"] = (df["bb_width_bps"] < (roll_min_width * 1.10)).astype(int)
 
-    # 5) EMA20/EMA50 slope in bps per bar
-    ema20 = df["close"].ewm(span=20, adjust=False).mean()
-    ema50 = df["close"].ewm(span=50, adjust=False).mean()
+    # EMA slopes
+    ema20 = df["Close"].ewm(span=20, adjust=False).mean()
+    ema50 = df["Close"].ewm(span=50, adjust=False).mean()
     df["ema20_slope_bps"] = ema20.pct_change() * 10000.0
     df["ema50_slope_bps"] = ema50.pct_change() * 10000.0
 
-    # 6) adx14 alias
+    # adx14 alias
     df["adx14"] = df["ADX"]
 
-    # 7) macd_hist_delta
+    # macd_hist_delta
     df["macd_hist_delta"] = df["MACD_Hist"].diff()
 
-    # 8) VWAP (rolling 20-day) + vwap_diff_bps
+    # VWAP
     df["VWAP"] = _rolling_vwap(df, window=20)
     df["vwap_diff_bps"] = (
-        (df["close"] - df["VWAP"]) / df["VWAP"].replace(0, np.nan)
+        (df["Close"] - df["VWAP"]) / df["VWAP"].replace(0, np.nan)
     ) * 10000.0
 
-    # 9) ATR14 + atr_pct
+    # ATR14 + atr_pct
     df["ATR14"] = _atr_wilder(df, period=14)
-    df["atr_pct"] = (df["ATR14"] / df["close"].replace(0, np.nan)) * 100.0
+    df["atr_pct"] = (df["ATR14"] / df["Close"].replace(0, np.nan)) * 100.0
 
-    # 10) vol_z (rolling 20)
-    vol_roll = df["volume"].rolling(window=20, min_periods=5)
-    df["vol_z"] = (df["volume"] - vol_roll.mean()) / vol_roll.std(ddof=0)
+    # vol_z
+    vol_roll = df["Volume"].rolling(window=20, min_periods=5)
+    df["vol_z"] = (df["Volume"] - vol_roll.mean()) / vol_roll.std(ddof=0)
 
     return df
 
@@ -221,15 +215,19 @@ def fetch_historical_from_config(config_path: str, interval: str = "day"):
             continue
 
         df = pd.DataFrame(candles)
-        # Ensure expected column names (lowercase) exist
-        expected = {"date", "open", "high", "low", "close", "volume"}
-        missing = expected - set(df.columns)
-        if missing:
-            print(f"⚠️ Missing columns for {stock_code}: {missing}")
-            continue
+
+        # 🔹 Rename to match Redis naming
+        rename_map = {
+            "date": "Timestamp",
+            "open": "Open",
+            "high": "High",
+            "low": "Low",
+            "close": "Close",
+            "volume": "Volume",
+        }
+        df.rename(columns=rename_map, inplace=True)
 
         df = calculate_indicators(df)
-
         df = df.round(4)
 
         out = os.path.join(
